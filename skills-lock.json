@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "llm-wiki": {
+      "source": "dimple-smile/agent-skills",
+      "sourceType": "github",
+      "computedHash": "ffc25eec08566da1850a33ece56cf27072e496b83e2ffa337b77ff8e3abf91fc"
+    }
+  }
+}
