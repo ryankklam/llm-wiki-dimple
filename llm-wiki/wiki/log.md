@@ -1,6 +1,13 @@
 # Wiki Log
 
 <!-- 操作记录按时间追加在此，格式：## [YYYY-MM-DD] 操作类型 | 描述 -->
+## [2026-04-15] ingest | Karpathy 的 LLM Wiki 范式，到底值不值得践行？
+
+- **来源**：https://wangshuyi.substack.com/p/karpathy-llm-wiki
+- **新增页面**：2026-04-15-karpathy-llm-wiki
+- **更新页面**：index.md, overview.md
+- **影响范围**：1 个页面
+
 ## [2026-04-13] ingest | skill实战: 从0到1写一个你自己的skill
 
 - **来源**：https://www.xiaohongshu.com/explore/69cd0cad0000000021004fde
