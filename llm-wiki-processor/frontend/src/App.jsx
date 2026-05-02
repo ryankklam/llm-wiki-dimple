@@ -12,6 +12,7 @@ function App() {
   const [progress, setProgress] = useState(0)
   const [logs, setLogs] = useState([])
   const [showResult, setShowResult] = useState(false)
+  const [showProgress, setShowProgress] = useState(false)
 
   // 步骤定义
   const steps = [
@@ -32,6 +33,7 @@ function App() {
     
     // 重置状态
     setIsProcessing(true)
+    setShowProgress(true)
     setStatus('正在处理视频...')
     setError('')
     setIsValid(true)
@@ -106,6 +108,8 @@ function App() {
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(() => {
       addLog('内容已复制到剪贴板')
+    }).catch(err => {
+      addLog('复制失败: ' + err.message, 'error')
     })
   }
 
@@ -159,8 +163,8 @@ function App() {
           </button>
         </form>
 
-        {/* 处理过程展示 */}
-        {isProcessing && (
+        {/* 处理过程展示 - 始终在处理中和处理完成后都显示 */}
+        {showProgress && (
           <div className="mb-8">
             {/* 步骤指示器 */}
             <div className="mb-6">
@@ -170,16 +174,16 @@ function App() {
                   <div key={step.id} className="flex flex-col items-center z-10">
                     <div 
                       className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 ${
-                        index < currentStep ? 'bg-green-500 text-white' :
+                        index < currentStep || (!isProcessing && showProgress) ? 'bg-green-500 text-white' :
                         index === currentStep ? 'bg-blue-500 text-white animate-pulse' :
                         'bg-gray-200 text-gray-500'
                       }`}
                     >
-                      {index < currentStep ? '✓' : step.icon}
+                      {(index < currentStep || (!isProcessing && showProgress)) ? '✓' : step.icon}
                     </div>
                     <p 
                       className={`mt-2 text-sm ${
-                        index <= currentStep ? 'text-gray-700' : 'text-gray-400'
+                        (index <= currentStep || (!isProcessing && showProgress)) ? 'text-gray-700' : 'text-gray-400'
                       }`}
                     >
                       {step.name}
@@ -193,7 +197,9 @@ function App() {
             <div className="mb-4">
               <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <div 
-                  className="bg-blue-500 h-2.5 rounded-full transition-all duration-300"
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    !isProcessing && progress === 100 ? 'bg-green-500' : 'bg-blue-500'
+                  }`}
                   style={{ width: `${progress}%` }}
                 ></div>
               </div>
@@ -265,16 +271,22 @@ function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-500">标题</p>
-                  <p className="font-medium truncate">{result.video_info.title}</p>
+                  <p className="font-medium truncate">{result.video_info?.title || '未获取到标题'}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">作者</p>
-                  <p className="font-medium">{result.video_info.author}</p>
+                  <p className="font-medium">{result.video_info?.author || '未知作者'}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">视频ID</p>
-                  <p className="font-medium">{result.video_info.video_id}</p>
+                  <p className="font-medium">{result.video_info?.video_id || '未知ID'}</p>
                 </div>
+                {result.video_info?.original_link && (
+                  <div>
+                    <p className="text-sm text-gray-500">原始链接</p>
+                    <p className="font-medium text-blue-600 break-all text-sm">{result.video_info.original_link}</p>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -287,47 +299,60 @@ function App() {
                   </svg>
                   字幕信息
                 </h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="text-sm text-gray-500">字幕来源</p>
-                    <p className="font-medium">
-                      {result.subtitle_result.source === 'metadata' && '视频元数据'}
-                      {result.subtitle_result.source === 'video' && '视频内置字幕'}
-                      {result.subtitle_result.source === 'audio' && '音频识别（Whisper）'}
-                      {!['metadata', 'video', 'audio'].includes(result.subtitle_result.source) && result.subtitle_result.source}
-                    </p>
+                {result.subtitle_result.success ? (
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-sm text-gray-500">字幕来源</p>
+                      <p className="font-medium">
+                        {result.subtitle_result.source === 'metadata' && '视频元数据'}
+                        {result.subtitle_result.source === 'video' && '视频内置字幕'}
+                        {result.subtitle_result.source === 'audio' && '音频识别（Whisper）'}
+                        {!['metadata', 'video', 'audio'].includes(result.subtitle_result.source) && (result.subtitle_result.source || '未知来源')}
+                      </p>
+                    </div>
+                    {result.subtitle_result.confidence && (
+                      <div>
+                        <p className="text-sm text-gray-500">置信度</p>
+                        <p className="font-medium">{Math.round(result.subtitle_result.confidence * 100)}%</p>
+                      </div>
+                    )}
+                    {result.subtitle_result.md_path && (
+                      <div>
+                        <p className="text-sm text-gray-500">带时间戳文件</p>
+                        <p className="font-medium text-blue-600 break-all text-sm">{result.subtitle_result.md_path}</p>
+                      </div>
+                    )}
+                    {result.subtitle_result.text_only_path && (
+                      <div>
+                        <p className="text-sm text-gray-500">纯文字文件</p>
+                        <p className="font-medium text-blue-600 break-all text-sm">{result.subtitle_result.text_only_path}</p>
+                      </div>
+                    )}
+                    
+                    {/* 字幕内容预览 */}
+                    {result.subtitle_result.subtitles && (
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <p className="text-sm text-gray-500">字幕内容</p>
+                          <button
+                            onClick={() => copyToClipboard(result.subtitle_result.subtitles)}
+                            className="text-xs text-blue-500 hover:text-blue-700"
+                          >
+                            复制全部
+                          </button>
+                        </div>
+                        <div className="bg-gray-50 p-3 rounded-lg max-h-60 overflow-y-auto text-sm">
+                          <pre className="whitespace-pre-wrap">{result.subtitle_result.subtitles}</pre>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  {result.subtitle_result.confidence && (
-                    <div>
-                      <p className="text-sm text-gray-500">置信度</p>
-                      <p className="font-medium">{Math.round(result.subtitle_result.confidence * 100)}%</p>
-                    </div>
-                  )}
-                  {result.subtitle_result.md_path && (
-                    <div>
-                      <p className="text-sm text-gray-500">输出文件</p>
-                      <p className="font-medium text-blue-600 break-all">{result.subtitle_result.md_path}</p>
-                    </div>
-                  )}
-                  
-                  {/* 字幕内容预览 */}
-                  {result.subtitle_result.subtitles && (
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="text-sm text-gray-500">字幕内容</p>
-                        <button
-                          onClick={() => copyToClipboard(result.subtitle_result.subtitles)}
-                          className="text-xs text-blue-500 hover:text-blue-700"
-                        >
-                          复制全部
-                        </button>
-                      </div>
-                      <div className="bg-gray-50 p-3 rounded-lg max-h-60 overflow-y-auto text-sm">
-                        <pre className="whitespace-pre-wrap">{result.subtitle_result.subtitles}</pre>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                ) : (
+                  <div className="text-red-600">
+                    <p className="font-medium">字幕提取失败</p>
+                    <p className="text-sm">{result.subtitle_result.error || '未知错误'}</p>
+                  </div>
+                )}
               </div>
             )}
 

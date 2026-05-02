@@ -4,12 +4,39 @@
 import subprocess
 import os
 import tempfile
+import yaml
 from typing import Dict, Optional, List, Callable, Any
+
+
+def _load_config() -> Dict[str, Any]:
+    """加载配置文件"""
+    config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'config.yaml')
+    try:
+        if os.path.exists(config_path):
+            with open(config_path, 'r', encoding='utf-8') as f:
+                return yaml.safe_load(f) or {}
+    except Exception as e:
+        print(f"Error loading config: {e}")
+    return {}
+
+
+def _get_whisper_model() -> str:
+    """从配置获取Whisper模型名称"""
+    config = _load_config()
+    whisper_config = config.get('whisper', {})
+    return whisper_config.get('model', 'small')
+
+
+def _get_language() -> str:
+    """从配置获取语言设置"""
+    config = _load_config()
+    subtitle_config = config.get('subtitle', {})
+    return subtitle_config.get('language', 'zh')
 
 
 def extract_from_audio(
     video_path: str,
-    language: str = "zh",
+    language: Optional[str] = None,
     progress_callback: Optional[Callable] = None
 ) -> Optional[Dict[str, Any]]:
     """
@@ -17,13 +44,17 @@ def extract_from_audio(
     
     Args:
         video_path: 视频文件路径
-        language: 语言代码，默认为中文
+        language: 语言代码，默认从配置文件读取
         progress_callback: 进度回调函数
         
     Returns:
         包含字幕和时间戳的字典，失败返回None
     """
     try:
+        # 如果未指定语言，从配置读取
+        if language is None:
+            language = _get_language()
+        
         # 检查视频文件是否存在
         if not os.path.exists(video_path):
             print(f"Video file not found: {video_path}")
@@ -146,8 +177,12 @@ def _transcribe_audio(
         if progress_callback:
             progress_callback({"step": "model_load", "progress": 40, "message": "Loading Whisper model..."})
         
-        # 加载模型（使用small模型，平衡速度和准确度）
-        model = whisper.load_model("small")
+        # 从配置获取模型
+        model_name = _get_whisper_model()
+        print(f"Loading Whisper model: {model_name}")
+        
+        # 加载模型
+        model = whisper.load_model(model_name)
         
         if progress_callback:
             progress_callback({"step": "transcription", "progress": 50, "message": "Starting transcription..."})
@@ -177,6 +212,8 @@ def _transcribe_audio(
             'text': full_text,
             'timestamps': timestamps,
             'source': 'audio',
+            'model': model_name,
+            'language': language,
             'confidence': 0.85  # 模拟置信度
         }
         

@@ -1,0 +1,23 @@
+# LLM Wiki Processor 配置文件
+
+# Whisper 语音识别配置
+whisper:
+  # 模型选择: tiny, base, small, medium, large
+  # tiny - 最快, 最低准确度
+  # base - 快, 低准确度
+  # small - 中等速度, 中等准确度 (推荐)
+  # medium - 慢, 高准确度
+  # large - 最慢, 最高准确度
+  model: small
+
+# 字幕提取配置
+subtitle:
+  # 默认语言: zh (中文), en (英文)
+  language: zh
+
+# 输出配置
+output:
+  # 是否保留原始视频文件
+  keep_video: false
+  # 是否保留提取的音频文件
+  keep_audio: false
