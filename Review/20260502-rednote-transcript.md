@@ -149,12 +149,24 @@ video_info = {
 | `openai-whisper` | >=20231117 | OpenAI的语音识别模型 |
 | `pydub` | >=0.25.1 | 音频处理库 |
 | `python-dotenv` | >=1.0.0 | 环境变量管理 |
+| `pyyaml` | >=6.0 | YAML配置文件解析 |
+
+#### 3.5 配置文件新增 (`config.yaml`)
+
+**新增配置项:**
+
+| 配置项 | 默认值 | 说明 |
+|--------|--------|------|
+| `whisper.model` | `small` | Whisper模型大小（tiny/base/small/medium/large） |
+| `subtitle.language` | `zh` | 默认识别语言 |
+| `output.keep_video` | `false` | 是否保留原始视频文件 |
+| `output.keep_audio` | `false` | 是否保留提取的音频文件 |
 
 ---
 
 ### 🎨 前端用户体验升级 (`App.jsx`)
 
-#### 3.5 新增状态管理
+#### 3.6 新增状态管理
 
 | 状态变量 | 类型 | 用途 |
 |----------|------|------|
@@ -162,8 +174,9 @@ video_info = {
 | `progress` | number | 进度百分比 (0-100) |
 | `logs` | array | 实时日志记录 |
 | `showResult` | boolean | 控制结果显示 |
+| `showProgress` | boolean | 控制进度显示 |
 
-#### 3.6 步骤指示器
+#### 3.7 步骤指示器
 
 定义了5个处理步骤：
 1. 🔍 解析视频链接
@@ -172,7 +185,7 @@ video_info = {
 4. 📝 提取字幕信息
 5. 💾 保存结果文件
 
-#### 3.7 结果展示增强
+#### 3.8 结果展示增强
 
 **新增字幕信息展示:**
 - 字幕来源（元数据/视频/音频）
@@ -190,7 +203,7 @@ video_info = {
 
 ### 🚀 运维脚本
 
-#### 3.8 Windows批处理脚本
+#### 3.9 Windows批处理脚本
 
 | 脚本 | 功能 |
 |------|------|
@@ -209,7 +222,7 @@ video_info = {
 
 ### 📁 配置文件更新
 
-#### 3.9 `.gitignore` 更新
+#### 3.10 `.gitignore` 更新
 
 ```diff
 +output/
