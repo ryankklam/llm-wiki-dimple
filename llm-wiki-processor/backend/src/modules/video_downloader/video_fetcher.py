@@ -82,6 +82,22 @@ def fetch_video_info(video_id: str, original_link: Optional[str] = None) -> Dict
                     author = matches[0].strip()
                     print(f"Found author: {author}")
                     break
+            
+            # 尝试提取笔记内容/描述
+            note_patterns = [
+                r'"desc"["\']\s*[:=]\s*["\']([^"\']+)',
+                r'"content"["\']\s*[:=]\s*["\']([^"\']+)',
+                r'"note"["\']\s*[:=]\s*["\']([^"\']+)',
+            ]
+            
+            note_content = ''
+            for pattern in note_patterns:
+                matches = re.findall(pattern, html_content)
+                if matches:
+                    note_content = matches[0].strip()
+                    if note_content:
+                        print(f"Found note content: {note_content[:100]}...")
+                        break
         
         # 构建视频信息
         video_info = {
@@ -89,6 +105,7 @@ def fetch_video_info(video_id: str, original_link: Optional[str] = None) -> Dict
             'title': title,
             'author': author,
             'description': description,
+            'note_content': note_content,
             'duration': 0,
             'cover_url': cover_url,
             'video_url': video_url,

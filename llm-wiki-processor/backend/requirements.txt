@@ -1,3 +1,8 @@
 requests==2.31.0
 yt-dlp>=2023.11.16
 you-get>=0.4.1650
+ffmpeg-python>=0.2.0
+openai-whisper>=20231117
+pydub>=0.25.1
+python-dotenv>=1.0.0
+pyyaml>=6.0
