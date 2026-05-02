@@ -16,6 +16,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from modules.video_downloader import download_video, parse_xiaohongshu_link, fetch_video_info
+from modules.subtitle_extractor import extract_subtitles
 
 PORT = 3001
 
@@ -86,9 +87,11 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
                     self._send_response(500, {'status': 'error', 'error': video_info['error']})
                     return
                 
-                # 创建临时目录
+                # 创建临时目录和输出目录
                 temp_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'temp')
+                output_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'output')
                 os.makedirs(temp_dir, exist_ok=True)
+                os.makedirs(output_dir, exist_ok=True)
                 
                 # 下载视频
                 download_path = download_video(video_info, temp_dir)
@@ -96,17 +99,28 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
                     self._send_response(500, {'status': 'error', 'error': 'Failed to download video'})
                     return
                 
+                # 提取字幕
+                subtitle_result = extract_subtitles(
+                    download_path,
+                    video_info,
+                    output_dir
+                )
+                
                 # 构建响应
                 response = {
                     "status": "success",
                     "video_info": video_info,
                     "download_path": download_path,
+                    "subtitle_result": subtitle_result,
                     "message": "Video processed successfully"
                 }
                 
                 self._send_response(200, response)
                 
             except Exception as e:
+                print(f"Error processing video: {str(e)}")
+                import traceback
+                traceback.print_exc()
                 self._send_response(500, {'status': 'error', 'error': f'Error processing video: {str(e)}'})
         else:
             self._send_response(404, {'error': 'Not found'})

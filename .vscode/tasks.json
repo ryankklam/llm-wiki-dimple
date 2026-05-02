@@ -1,0 +1,67 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 启动后端服务",
+      "type": "shell",
+      "command": "${workspaceFolder}\\llm-wiki-processor\\start-backend.bat",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🚀 启动前端服务",
+      "type": "shell",
+      "command": "${workspaceFolder}\\llm-wiki-processor\\start-frontend.bat",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🚀 启动完整应用",
+      "type": "shell",
+      "command": "${workspaceFolder}\\llm-wiki-processor\\start-all.bat",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🛑 停止所有服务",
+      "type": "shell",
+      "command": "${workspaceFolder}\\llm-wiki-processor\\stop-all.bat",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🧪 测试后端API",
+      "type": "shell",
+      "command": "curl http://localhost:3001/api/health",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

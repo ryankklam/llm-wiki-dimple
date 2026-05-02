@@ -36,6 +36,8 @@ env/
 
 # Backend
 temp/
+output/
+test_output/
 *.mp4
 *.avi
 *.mov
