@@ -1,6 +1,14 @@
 # Wiki Log
 
 <!-- 操作记录按时间追加在此，格式：## [YYYY-MM-DD] 操作类型 | 描述 -->
+## [2026-05-04] ingest | VibeCoding开发前9个步骤和开发中5个关键点
+
+- **来源**：raw/rednote/VibeCoding开发前9个步骤和开发中5个关键点.md
+- **新增页面**：2026-05-04-vibecoding-9-steps（来源摘要）
+- **新增概念**：vibecoding, prd, mvp
+- **更新页面**：index.md, overview.md
+- **影响范围**：4 个页面
+
 ## [2026-05-02] ingest | Harness工程：这才是AI时代工程师正在干的
 
 - **来源**：raw/rednote/Harness工程：这才是AI时代工程师正在干的.md
