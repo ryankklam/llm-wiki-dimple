@@ -1,6 +1,14 @@
 # Wiki Log
 
 <!-- 操作记录按时间追加在此，格式：## [YYYY-MM-DD] 操作类型 | 描述 -->
+## [2026-05-02] ingest | Harness工程：这才是AI时代工程师正在干的
+
+- **来源**：raw/rednote/Harness工程：这才是AI时代工程师正在干的.md
+- **新增页面**：2026-05-02-harness-engineering（来源摘要）
+- **新增概念**：harness-engineering, memory-layer, execution-layer, feedback-layer, orchestration-layer, on-demand-loading, sandbox-isolation, feedback-loop
+- **更新页面**：index.md
+- **影响范围**：9 个页面
+
 ## [2026-04-15] ingest | Karpathy 的 LLM Wiki 范式，到底值不值得践行？
 
 - **来源**：https://wangshuyi.substack.com/p/karpathy-llm-wiki
