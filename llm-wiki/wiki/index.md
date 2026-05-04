@@ -5,6 +5,7 @@
 
 ## 来源
 <!-- 摄入的原始资料摘要，按时间倒序 -->
+- [[2026-05-04-skill-pratiche]] - skill实战：从0到1写一个你自己的skill
 - [[2026-05-04-vibecoding-9-steps]] - VibeCoding开发前9个步骤和开发中5个关键点
 - [[2026-05-02-harness-engineering]] - Harness工程：这才是AI时代工程师正在干的
 - [[2026-04-15-karpathy-llm-wiki]] - Karpathy 的 LLM Wiki 范式，到底值不值得践行？
@@ -17,6 +18,7 @@
 ## 概念
 <!-- 理论、方法、术语等，按名称排序 -->
 - [[agent]] - Agent 概念
+- [[claude-code]] - Claude Code（AI 编程 IDE）
 - [[execution-layer]] - Execution Layer（执行层）
 - [[feedback-layer]] - Feedback Layer（反馈层）
 - [[feedback-loop]] - Feedback Loop（反馈回路）

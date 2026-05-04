@@ -1,6 +1,14 @@
 # Wiki Log
 
 <!-- 操作记录按时间追加在此，格式：## [YYYY-MM-DD] 操作类型 | 描述 -->
+## [2026-05-04] ingest | skill实战：从0到1写一个你自己的skill
+
+- **来源**：raw/rednote/skill实战：从0到1写一个你自己的skill.md
+- **新增页面**：2026-05-04-skill-pratiche（来源摘要）
+- **新增概念**：claude-code
+- **更新页面**：index.md, overview.md
+- **影响范围**：3 个页面
+
 ## [2026-05-04] ingest | VibeCoding开发前9个步骤和开发中5个关键点
 
 - **来源**：raw/rednote/VibeCoding开发前9个步骤和开发中5个关键点.md
