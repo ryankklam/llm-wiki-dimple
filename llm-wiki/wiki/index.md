@@ -5,6 +5,8 @@
 
 ## 来源
 <!-- 摄入的原始资料摘要，按时间倒序 -->
+- [[2026-05-05-万物都可蒸馏Skill.md]] - 万物都可蒸馏Skill.md？5min讲清机制！
+- [[2026-05-04-harness-闪客]] - 你管这破玩意叫 Harness？（闪客）
 - [[2026-05-04-skill-pratiche]] - skill实战：从0到1写一个你自己的skill
 - [[2026-05-04-vibecoding-9-steps]] - VibeCoding开发前9个步骤和开发中5个关键点
 - [[2026-05-02-harness-engineering]] - Harness工程：这才是AI时代工程师正在干的
@@ -19,6 +21,7 @@
 <!-- 理论、方法、术语等，按名称排序 -->
 - [[agent]] - Agent 概念
 - [[claude-code]] - Claude Code（AI 编程 IDE）
+- [[context-engineering]] - Context Engineering（上下文工程）
 - [[execution-layer]] - Execution Layer（执行层）
 - [[feedback-layer]] - Feedback Layer（反馈层）
 - [[feedback-loop]] - Feedback Loop（反馈回路）
@@ -28,6 +31,7 @@
 - [[on-demand-loading]] - On-Demand Loading（按需加载）
 - [[orchestration-layer]] - Orchestration Layer（编排层）
 - [[prd]] - PRD（产品需求文档）
+- [[prompt-engineering]] - Prompt Engineering（提示词工程）
 - [[sandbox-isolation]] - Sandbox Isolation（沙箱隔离）
 - [[skill]] - Skill 概念
 - [[vibecoding]] - VibeCoding（AI 编程方法论）

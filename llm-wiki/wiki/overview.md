@@ -8,11 +8,22 @@ created: 2026-04-12
 > 本 Wiki 由 LLM 自动维护。你负责选题和提问，LLM 负责总结、交叉引用、归档和维护。
 
 ## 当前状态
-- 来源数量：6
-- 总页面数：23（含 index、log、overview）
-- 最近更新：2026-05-04
+- 来源数量：8
+- 总页面数：27（含 index、log、overview）
+- 最近更新：2026-05-05
 
 ## 核心发现
+
+### Harness Engineering 三阶段演进
+基于 [[2026-05-04-harness-闪客]]，AI对话范式经历了三个阶段：
+1. **Prompt Engineering（提示词工程）** - 优化输入给LLM的提示词来激发模型潜力
+2. **Context Engineering（上下文工程）** - 补充必要的上下文信息（RAG、工具调用、Long Memory等）
+3. **Harness Engineering（驾驭工程）** - 除了信息和工具，还要对AI进行约束（权限、规则、颗粒度等）
+
+### 两层驾驭模型
+视频提出的新视角：
+- **Agent 驾驭 大模型**：类似公司管理员工的方式
+- **人类 驾驭 Agent**：类似公司制定规章制度的方式
 
 ### Harness Engineering 四层架构
 基于 [[2026-05-02-harness-engineering]] 和 [[2026-04-13-小红书视频-skill实战]]，知识库构建了完整的 Harness Engineering 概念体系：

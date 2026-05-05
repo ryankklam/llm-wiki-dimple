@@ -1,6 +1,22 @@
 # Wiki Log
 
 <!-- 操作记录按时间追加在此，格式：## [YYYY-MM-DD] 操作类型 | 描述 -->
+## [2026-05-05] ingest | 万物都可蒸馏Skill.md？5min讲清机制！
+
+- **来源**：raw/rednote/万物都可蒸馏Skill.md？5min讲清机制！.md
+- **新增页面**：2026-05-05-万物都可蒸馏Skill.md（来源摘要）
+- **新增概念**：context-engineering（关联到 Harness Engineering 四层架构）
+- **更新页面**：index.md, overview.md, log.md
+- **影响范围**：3 个页面
+
+## [2026-05-04] ingest | 你管这破玩意叫 Harness？（闪客）
+
+- **来源**：raw/rednote/【闪客】你管这破玩意叫Harness？.md
+- **新增页面**：2026-05-04-harness-闪客（来源摘要）
+- **新增概念**：prompt-engineering, context-engineering
+- **更新页面**：index.md, overview.md
+- **影响范围**：4 个页面
+
 ## [2026-05-04] ingest | skill实战：从0到1写一个你自己的skill
 
 - **来源**：raw/rednote/skill实战：从0到1写一个你自己的skill.md
@@ -47,3 +63,6 @@
 - **新增页面**：2026-04-13-小红书视频-69b824b0000000001d01c798
 - **更新页面**：index.md, overview.md
 - **影响范围**：3 个页面
+
+## [2026-05-04] ingest | 摄入视频: 【闪客】你管这破玩意叫 Harness？
+- **文件**: 2026-05-04-闪客你管这破玩意叫 Harness.md
